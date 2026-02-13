@@ -8,7 +8,7 @@
  * 4. Позволяет скопировать ссылку и открыть предпросмотр
  */
 
-import { themes, questionPresets } from './themes.js';
+import { themes, questionPresets, yesTextPresets } from './themes.js';
 
 // =============================================
 // 1. Инициализация формы
@@ -56,6 +56,33 @@ function initStyleGrid() {
       </div>
     `;
         grid.appendChild(label);
+    });
+}
+
+function initYesTextSelect() {
+    const select = document.getElementById('yesTextSelect');
+
+    yesTextPresets.forEach((preset) => {
+        const option = document.createElement('option');
+        option.value = preset.text;
+        option.textContent = preset.text;
+        select.appendChild(option);
+    });
+
+    const customOption = document.createElement('option');
+    customOption.value = '__custom__';
+    customOption.textContent = '✏️ Свой вариант...';
+    select.appendChild(customOption);
+
+    select.addEventListener('change', () => {
+        const wrapper = document.getElementById('customYesTextWrapper');
+        if (select.value === '__custom__') {
+            wrapper.classList.add('visible');
+            document.getElementById('customYesText').focus();
+        } else {
+            wrapper.classList.remove('visible');
+        }
+        document.getElementById('yesTextGroup').classList.remove('error');
     });
 }
 
@@ -124,6 +151,20 @@ function validateForm() {
         data.style = selectedStyle.value;
     }
 
+    const yesTextSelect = document.getElementById('yesTextSelect');
+    const customYesText = document.getElementById('customYesText').value.trim();
+
+    if (!yesTextSelect.value) {
+        document.getElementById('yesTextGroup').classList.add('error');
+        isValid = false;
+    } else if (yesTextSelect.value === '__custom__' && !customYesText) {
+        document.getElementById('yesTextGroup').classList.add('error');
+        isValid = false;
+    } else {
+        document.getElementById('yesTextGroup').classList.remove('error');
+        data.yesText = yesTextSelect.value === '__custom__' ? customYesText : yesTextSelect.value;
+    }
+
     return isValid ? data : null;
 }
 
@@ -139,7 +180,6 @@ function encodeData(data) {
 
 function generateLink(data) {
     const encoded = encodeData(data);
-    // Берём путь до текущей директории (важно для GitHub Pages, где сайт в подпапке)
     const currentPath = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
     const baseUrl = window.location.origin + currentPath;
     return `${baseUrl}valentine.html?d=${encoded}`;
@@ -152,6 +192,7 @@ function generateLink(data) {
 function init() {
     initQuestionSelect();
     initStyleGrid();
+    initYesTextSelect();
     initFloatingHearts();
 
     document.getElementById('fromName').addEventListener('input', () => {
