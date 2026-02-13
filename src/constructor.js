@@ -14,11 +14,9 @@ import { themes, questionPresets } from './themes.js';
 // 1. Инициализация формы
 // =============================================
 
-/** Заполняем select вариантами вопросов */
 function initQuestionSelect() {
     const select = document.getElementById('questionSelect');
 
-    // Добавляем предустановленные варианты
     questionPresets.forEach((preset) => {
         const option = document.createElement('option');
         option.value = preset.text;
@@ -26,13 +24,11 @@ function initQuestionSelect() {
         select.appendChild(option);
     });
 
-    // Вариант "Свой вариант"
     const customOption = document.createElement('option');
     customOption.value = '__custom__';
     customOption.textContent = '✏️ Свой вариант...';
     select.appendChild(customOption);
 
-    // Показываем/скрываем текстовое поле для своего варианта
     select.addEventListener('change', () => {
         const wrapper = document.getElementById('customQuestionWrapper');
         if (select.value === '__custom__') {
@@ -41,12 +37,10 @@ function initQuestionSelect() {
         } else {
             wrapper.classList.remove('visible');
         }
-        // Убираем ошибку при выборе
         document.getElementById('questionGroup').classList.remove('error');
     });
 }
 
-/** Заполняем grid стилей карточками */
 function initStyleGrid() {
     const grid = document.getElementById('styleGrid');
 
@@ -65,7 +59,6 @@ function initStyleGrid() {
     });
 }
 
-/** Создаём плавающие сердечки на фоне */
 function initFloatingHearts() {
     const container = document.getElementById('floatingHearts');
     const heartEmojis = ['💕', '💖', '💗', '💝', '💘', '❤️', '🩷', '🩵'];
@@ -146,8 +139,10 @@ function encodeData(data) {
 
 function generateLink(data) {
     const encoded = encodeData(data);
-    const baseUrl = window.location.origin;
-    return `${baseUrl}/valentine.html?d=${encoded}`;
+    // Берём путь до текущей директории (важно для GitHub Pages, где сайт в подпапке)
+    const currentPath = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+    const baseUrl = window.location.origin + currentPath;
+    return `${baseUrl}valentine.html?d=${encoded}`;
 }
 
 // =============================================
