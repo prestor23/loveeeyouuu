@@ -86,15 +86,10 @@ function initFloatingHearts() {
 // 2. Валидация формы
 // =============================================
 
-/**
- * Проверяет заполненность обязательных полей.
- * Возвращает объект с данными формы или null при ошибке.
- */
 function validateForm() {
     let isValid = true;
     const data = {};
 
-    // Имя отправителя
     const fromName = document.getElementById('fromName').value.trim();
     if (!fromName) {
         document.getElementById('fromGroup').classList.add('error');
@@ -104,7 +99,6 @@ function validateForm() {
         data.from = fromName;
     }
 
-    // Имя получателя
     const toName = document.getElementById('toName').value.trim();
     if (!toName) {
         document.getElementById('toGroup').classList.add('error');
@@ -114,7 +108,6 @@ function validateForm() {
         data.to = toName;
     }
 
-    // Вопрос
     const questionSelect = document.getElementById('questionSelect');
     const customQuestion = document.getElementById('customQuestion').value.trim();
 
@@ -129,7 +122,6 @@ function validateForm() {
         data.question = questionSelect.value === '__custom__' ? customQuestion : questionSelect.value;
     }
 
-    // Стиль
     const selectedStyle = document.querySelector('input[name="style"]:checked');
     if (!selectedStyle) {
         document.getElementById('styleGroup').classList.add('error');
@@ -146,23 +138,12 @@ function validateForm() {
 // 3. Генерация ссылки
 // =============================================
 
-/**
- * Кодирует данные формы в Base64 строку.
- * Используем encodeURIComponent для корректной работы с кириллицей.
- * 
- * @param {Object} data — объект с полями from, to, question, style
- * @returns {string} — Base64-закодированная строка
- */
 function encodeData(data) {
     const jsonString = JSON.stringify(data);
-    // encodeURIComponent нужен для корректной работы btoa с UTF-8 (кириллица)
     const encoded = btoa(encodeURIComponent(jsonString));
     return encoded;
 }
 
-/**
- * Формирует полный URL валентинки.
- */
 function generateLink(data) {
     const encoded = encodeData(data);
     const baseUrl = window.location.origin;
@@ -178,7 +159,6 @@ function init() {
     initStyleGrid();
     initFloatingHearts();
 
-    // Убираем ошибки при вводе
     document.getElementById('fromName').addEventListener('input', () => {
         document.getElementById('fromGroup').classList.remove('error');
     });
@@ -186,7 +166,6 @@ function init() {
         document.getElementById('toGroup').classList.remove('error');
     });
 
-    // Обработка отправки формы
     const form = document.getElementById('valentineForm');
     form.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -196,7 +175,6 @@ function init() {
 
         const link = generateLink(data);
 
-        // Показываем блок с ссылкой
         const linkResult = document.getElementById('linkResult');
         const linkInput = document.getElementById('linkInput');
         const btnPreview = document.getElementById('btnPreview');
@@ -205,11 +183,9 @@ function init() {
         btnPreview.href = link;
         linkResult.classList.add('visible');
 
-        // Скроллим к ссылке
         linkResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
 
-    // Копирование ссылки в буфер обмена
     const btnCopy = document.getElementById('btnCopy');
     btnCopy.addEventListener('click', async () => {
         const linkInput = document.getElementById('linkInput');
@@ -222,7 +198,6 @@ function init() {
                 btnCopy.classList.remove('copied');
             }, 2000);
         } catch {
-            // Fallback для старых браузеров
             linkInput.select();
             document.execCommand('copy');
             btnCopy.textContent = '✅ Скопировано!';
@@ -233,5 +208,4 @@ function init() {
     });
 }
 
-// Запуск при загрузке
 document.addEventListener('DOMContentLoaded', init);
