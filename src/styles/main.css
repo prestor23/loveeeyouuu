@@ -1,0 +1,462 @@
+/* ==========================================================
+   main.css — Стили для страницы-конструктора
+   ========================================================== */
+
+/* Google Fonts — Comfortaa для русского текста */
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+/* ---------- CSS Variables ---------- */
+:root {
+  --pink-100: #fff0f3;
+  --pink-200: #ffccd5;
+  --pink-300: #ffb3c1;
+  --pink-400: #ff8fa3;
+  --pink-500: #ff6b8a;
+  --pink-600: #ff4d6d;
+  --pink-700: #c9184a;
+  --red-500: #ff4757;
+  --purple-500: #6c5ce7;
+  --white: #ffffff;
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.15);
+  --radius: 20px;
+  --radius-sm: 12px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------- Reset & Base ---------- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Comfortaa', 'Inter', sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 50%, #ffecd2 100%);
+  color: #2d3436;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ---------- Floating Hearts Background ---------- */
+.floating-hearts {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.floating-hearts .heart {
+  position: absolute;
+  font-size: 1.5rem;
+  opacity: 0.15;
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(100vh) rotate(0deg) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.15;
+  }
+  90% {
+    opacity: 0.15;
+  }
+  100% {
+    transform: translateY(-10vh) rotate(720deg) scale(0.5);
+    opacity: 0;
+  }
+}
+
+/* ---------- Page Container ---------- */
+.page-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+
+/* ---------- Header ---------- */
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--white);
+  text-shadow: 0 4px 20px rgba(255, 75, 109, 0.4);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.5px;
+}
+
+.header h1 .accent {
+  background: linear-gradient(135deg, #ff6b8a, #ff4757);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.header p {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 400;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- Glass Card ---------- */
+.glass-card {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 560px;
+  box-shadow: var(--shadow-lg);
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- Form Groups ---------- */
+.form-group {
+  margin-bottom: 1.75rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 0.6rem;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group input[type='text'],
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 0.85rem 1.2rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 0.95rem;
+  color: #2d3436;
+  transition: var(--transition);
+  outline: none;
+}
+
+.form-group input[type='text']::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(45, 52, 54, 0.4);
+}
+
+.form-group input[type='text']:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: var(--pink-600);
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 0 0 4px rgba(255, 77, 109, 0.15);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-group select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%232d3436' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+/* ---------- Custom Question Toggle ---------- */
+.custom-question-wrapper {
+  margin-top: 0.75rem;
+  display: none;
+}
+
+.custom-question-wrapper.visible {
+  display: block;
+  animation: fadeInUp 0.3s ease-out;
+}
+
+/* ---------- Style Picker (Radio Cards) ---------- */
+.style-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.style-option {
+  position: relative;
+}
+
+.style-option input[type='radio'] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.style-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem 0.8rem;
+  border-radius: var(--radius-sm);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
+}
+
+.style-card:hover {
+  background: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.style-option input[type='radio']:checked + .style-card {
+  border-color: var(--pink-600);
+  background: rgba(255, 77, 109, 0.15);
+  box-shadow: 0 0 0 3px rgba(255, 77, 109, 0.2);
+}
+
+.style-card .style-emoji {
+  font-size: 2.2rem;
+  margin-bottom: 0.4rem;
+}
+
+.style-card .style-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #2d3436;
+}
+
+.style-card .style-desc {
+  font-size: 0.65rem;
+  color: rgba(45, 52, 54, 0.6);
+  margin-top: 0.2rem;
+}
+
+/* ---------- Submit Button ---------- */
+.btn-create {
+  display: block;
+  width: 100%;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, var(--pink-600) 0%, var(--red-500) 100%);
+  color: var(--white);
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 20px rgba(255, 77, 109, 0.4);
+  letter-spacing: 0.5px;
+  margin-top: 0.5rem;
+}
+
+.btn-create:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(255, 77, 109, 0.5);
+}
+
+.btn-create:active {
+  transform: translateY(-1px);
+}
+
+/* ---------- Generated Link Section ---------- */
+.link-result {
+  display: none;
+  margin-top: 2rem;
+  text-align: center;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.link-result.visible {
+  display: block;
+}
+
+.link-result h3 {
+  font-size: 1.2rem;
+  color: var(--white);
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.link-box {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+}
+
+.link-box input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.5);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  color: #2d3436;
+  outline: none;
+}
+
+.btn-copy {
+  padding: 0.75rem 1.2rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--purple-500);
+  color: var(--white);
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.btn-copy:hover {
+  background: #5f3dc4;
+  transform: translateY(-2px);
+}
+
+.btn-copy.copied {
+  background: #00b894;
+}
+
+/* ---------- Preview Button ---------- */
+.btn-preview {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.6rem 1.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--white);
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.btn-preview:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  margin-top: 2rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.8rem;
+}
+
+/* ---------- Validation Error ---------- */
+.form-group.error input,
+.form-group.error select,
+.form-group.error textarea {
+  border-color: var(--red-500);
+  background: rgba(255, 71, 87, 0.1);
+}
+
+.error-msg {
+  display: none;
+  font-size: 0.75rem;
+  color: var(--red-500);
+  margin-top: 0.3rem;
+  font-weight: 500;
+}
+
+.form-group.error .error-msg {
+  display: block;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 600px) {
+  .header h1 {
+    font-size: 1.8rem;
+  }
+
+  .header p {
+    font-size: 0.95rem;
+  }
+
+  .glass-card {
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+
+  .style-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+
+  .style-card {
+    padding: 0.9rem 0.5rem;
+  }
+
+  .style-card .style-emoji {
+    font-size: 1.8rem;
+  }
+
+  .link-box {
+    flex-direction: column;
+  }
+}

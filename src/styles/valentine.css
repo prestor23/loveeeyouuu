@@ -1,0 +1,408 @@
+/* ==========================================================
+   valentine.css — Стили для страницы-валентинки (результат)
+   ========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
+
+/* ---------- Variables ---------- */
+:root {
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --bounce: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: 'Comfortaa', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    transition: background 0.6s ease;
+}
+
+/* ---------- Valentine Container ---------- */
+.valentine-container {
+    text-align: center;
+    padding: 2rem;
+    max-width: 500px;
+    width: 100%;
+}
+
+/* ---------- Question Screen ---------- */
+.question-screen {
+    animation: scaleIn 0.6s var(--bounce);
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.recipient-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gif-container {
+    width: 220px;
+    height: 220px;
+    margin: 1rem auto;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.gif-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+}
+
+.question-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2d3436;
+    margin: 1.2rem 0;
+    line-height: 1.4;
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.3);
+}
+
+.no-persuasion {
+    font-size: 1rem;
+    color: #e17055;
+    margin-bottom: 1rem;
+    min-height: 1.5rem;
+    font-weight: 500;
+    transition: var(--transition);
+    animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-8px);
+    }
+
+    50% {
+        transform: translateX(8px);
+    }
+
+    75% {
+        transform: translateX(-4px);
+    }
+}
+
+/* ---------- Buttons ---------- */
+.buttons-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.btn-yes {
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #ff6b8a 0%, #ff4757 100%);
+    color: white;
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s var(--bounce);
+    box-shadow: 0 4px 20px rgba(255, 75, 109, 0.4);
+    z-index: 10;
+}
+
+.btn-yes:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 30px rgba(255, 75, 109, 0.6);
+}
+
+/* Growing animation for Yes button as No is pressed */
+.btn-yes.growing {
+    animation: pulse 0.5s ease;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.btn-no {
+    padding: 0.8rem 2rem;
+    border: 2px solid rgba(45, 52, 54, 0.3);
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.4);
+    color: #636e72;
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-no:hover {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+/* Shrinking stages for No button */
+.btn-no.shrink-1 {
+    transform: scale(0.9);
+}
+
+.btn-no.shrink-2 {
+    transform: scale(0.75);
+}
+
+.btn-no.shrink-3 {
+    transform: scale(0.6);
+}
+
+.btn-no.shrink-4 {
+    transform: scale(0.5);
+    font-size: 0.7rem;
+}
+
+.btn-no.shrink-5 {
+    transform: scale(0.35);
+    font-size: 0.6rem;
+}
+
+.btn-no.shrink-6 {
+    transform: scale(0.25);
+    font-size: 0.5rem;
+}
+
+.btn-no.shrink-7 {
+    transform: scale(0.15);
+    opacity: 0.5;
+}
+
+/* ---------- YES Screen (Celebration) ---------- */
+.yes-screen {
+    display: none;
+    animation: celebrationIn 0.8s var(--bounce);
+}
+
+.yes-screen.visible {
+    display: block;
+}
+
+@keyframes celebrationIn {
+    from {
+        transform: scale(0.3) rotate(-10deg);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+.celebration-gif {
+    width: 250px;
+    height: 250px;
+    margin: 1rem auto;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.celebration-gif img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.yes-text {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2d3436;
+    margin-bottom: 1rem;
+}
+
+.couple-names {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--pink-600, #ff4d6d);
+    margin-top: 0.5rem;
+}
+
+.couple-names .heart-icon {
+    display: inline-block;
+    font-size: 2rem;
+    animation: heartBeat 1s ease-in-out infinite;
+    margin: 0 0.5rem;
+}
+
+@keyframes heartBeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    25% {
+        transform: scale(1.2);
+    }
+
+    50% {
+        transform: scale(1);
+    }
+
+    75% {
+        transform: scale(1.3);
+    }
+}
+
+/* ---------- Confetti Canvas ---------- */
+#confetti-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+}
+
+/* ---------- Falling Hearts (CSS version) ---------- */
+.falling-hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 99;
+    overflow: hidden;
+}
+
+.falling-hearts .heart {
+    position: absolute;
+    top: -10%;
+    animation: fallDown linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes fallDown {
+    0% {
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* ---------- Error/Loading States ---------- */
+.error-screen {
+    display: none;
+    text-align: center;
+    padding: 3rem;
+}
+
+.error-screen.visible {
+    display: block;
+}
+
+.error-screen h2 {
+    font-size: 1.5rem;
+    color: #e17055;
+    margin-bottom: 1rem;
+}
+
+.error-screen p {
+    color: #636e72;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 500px) {
+    .valentine-container {
+        padding: 1.5rem 1rem;
+    }
+
+    .gif-container {
+        width: 180px;
+        height: 180px;
+    }
+
+    .question-text {
+        font-size: 1.2rem;
+    }
+
+    .btn-yes {
+        padding: 0.85rem 2rem;
+        font-size: 1.05rem;
+    }
+
+    .btn-no {
+        padding: 0.65rem 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .yes-text {
+        font-size: 1.5rem;
+    }
+
+    .celebration-gif {
+        width: 200px;
+        height: 200px;
+    }
+
+    .couple-names {
+        font-size: 1.2rem;
+    }
+}

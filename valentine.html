@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>💝 Для тебя...</title>
+    <meta name="description" content="Кто-то особенный отправил тебе валентинку!" />
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💝</text></svg>" />
+    <link rel="stylesheet" href="/src/styles/valentine.css" />
+</head>
+
+<body>
+    <!-- Confetti canvas (appears on YES) -->
+    <canvas id="confetti-canvas"></canvas>
+    <!-- Falling hearts (appears on YES) -->
+    <div class="falling-hearts" id="fallingHearts"></div>
+
+    <div class="valentine-container">
+
+        <!-- Question Screen -->
+        <div class="question-screen" id="questionScreen">
+            <p class="recipient-name" id="recipientName"></p>
+            <div class="gif-container" id="gifContainer">
+                <img id="themeGif" src="" alt="Valentine GIF" />
+            </div>
+            <h1 class="question-text" id="questionText"></h1>
+            <p class="no-persuasion" id="noPersuasion">&nbsp;</p>
+            <div class="buttons-container">
+                <button class="btn-yes" id="btnYes">Да ❤️</button>
+                <button class="btn-no" id="btnNo">Нет 💔</button>
+            </div>
+        </div>
+
+        <!-- YES / Celebration Screen -->
+        <div class="yes-screen" id="yesScreen">
+            <div class="celebration-gif" id="celebrationGifContainer">
+                <img id="celebrationGif" src="" alt="Celebration!" />
+            </div>
+            <h1 class="yes-text" id="yesText"></h1>
+            <p class="couple-names" id="coupleNames"></p>
+        </div>
+
+        <!-- Error Screen -->
+        <div class="error-screen" id="errorScreen">
+            <h2>😕 Ой, что-то пошло не так</h2>
+            <p>Эта ссылка повреждена или устарела. Попроси отправить новую!</p>
+        </div>
+
+    </div>
+
+    <script type="module" src="/src/valentine.js"></script>
+</body>
+
+</html>
