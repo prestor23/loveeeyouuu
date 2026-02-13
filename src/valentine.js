@@ -32,7 +32,7 @@ function initValentine(data) {
     document.getElementById('questionText').textContent = data.question;
     document.getElementById('themeGif').src = currentTheme.gifs[0];
     document.getElementById('celebrationGif').src = currentTheme.yesGif;
-    document.getElementById('yesText').textContent = currentTheme.yesText;
+    document.getElementById('yesText').textContent = data.yesText || currentTheme.yesText;
     document.getElementById('coupleNames').innerHTML =
         `${data.from} <span class="heart-icon">❤️</span> ${data.to}`;
     document.getElementById('questionScreen').style.display = 'block';
